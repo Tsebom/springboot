@@ -1,5 +1,6 @@
-package com.springboot.springbootstart.components;
+package com.springboot.springbootstart.model;
 
+import com.springboot.springbootstart.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

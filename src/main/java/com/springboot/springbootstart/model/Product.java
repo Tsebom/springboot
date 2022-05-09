@@ -1,13 +1,22 @@
-package com.springboot.springbootstart.components;
+package com.springboot.springbootstart.model;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "products")
 @Component
 @Scope("prototype")
 public class Product {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private int id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "cost")
     private double cost;
 
     public Product() {

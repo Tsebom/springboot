@@ -1,5 +1,6 @@
-package com.springboot.springbootstart.components;
+package com.springboot.springbootstart.repository;
 
+import com.springboot.springbootstart.model.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
