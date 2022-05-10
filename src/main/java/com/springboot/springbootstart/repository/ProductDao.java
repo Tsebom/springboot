@@ -13,11 +13,16 @@ public class ProductDao {
     EntityManagerFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
     EntityManager entityManager = factory.createEntityManager();
 
-    public Product saveOrYUpdate (Product product) {
+    public Product saveOrYUpdate(Product product) {
+        if (entityManager.contains(product)) {
+            entityManager.merge(product);
+        } else {
+            entityManager.persist(product);
+        }
         return product;
     }
 
-    public Product findById(Long id) {
+    public Product findById(int id) {
         Product product = entityManager.createNamedQuery("Product.findById", Product.class).getSingleResult();
         return product;
     }
@@ -27,7 +32,7 @@ public class ProductDao {
         return products;
     }
 
-    public void deleteById(Long id) {
-
+    public void deleteById(int id) {
+        entityManager.remove(findById(id));
     }
 }

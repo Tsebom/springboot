@@ -9,14 +9,14 @@ import javax.persistence.*;
 @Table(name = "products")
 @NamedQueries({
         @NamedQuery(name = "Product.findAll", query = "SELECT product FROM Product product"),
-        @NamedQuery(name = "Product.findById", query = "SELECT product FROM Product product WHERE product.id = :id"),
-        @NamedQuery(name = "Product.deleteById", query = "DELETE FROM products WHERE id = :id")
+        @NamedQuery(name = "Product.findById", query = "SELECT product FROM Product product WHERE product.id = :id")
+//        @NamedQuery(name = "Product.deleteById", query = "DELETE FROM products WHERE id = :id")
 })
 @Component
 @Scope("prototype")
 public class Product {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
     @Column(name = "title")
