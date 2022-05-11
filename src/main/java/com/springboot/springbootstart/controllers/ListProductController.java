@@ -1,7 +1,7 @@
 package com.springboot.springbootstart.controllers;
 
 import com.springboot.springbootstart.model.Product;
-import com.springboot.springbootstart.repository.ProductDao;
+import com.springboot.springbootstart.servises.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,29 +13,29 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
-public class CartController {
+public class ListProductController {
     @Autowired
     private ProductDao productDao;
 
-    @GetMapping("/cart")
+    @GetMapping("/list_products")
     public String getForm(Model model, Model modell) {
         Product product = new Product();
         model.addAttribute("product", product);
         setModelAttribute(modell);
-        return "cart";
+        return "list_products";
     }
 
-    @PostMapping("/cart")
+    @PostMapping("/list_products")
     public String create (Product product, Model model) {
         productDao.saveOrYUpdate(product);
         setModelAttribute(model);
-        return "cart";
+        return "list_products";
     }
 
-    @GetMapping("/cart/delete")
-    public String delete (@RequestParam int id, HttpServletResponse response) {
+    @GetMapping("/list_products/delete")
+    public String delete (@RequestParam Long id, HttpServletResponse response) {
         productDao.deleteById(id);
-        return "redirect:/cart";
+        return "redirect:/list_products";
     }
 
     private void setModelAttribute (Model model) {

@@ -1,4 +1,4 @@
-package com.springboot.springbootstart.repository;
+package com.springboot.springbootstart.servises;
 
 import com.springboot.springbootstart.model.Product;
 import org.hibernate.cfg.Configuration;
@@ -14,15 +14,19 @@ public class ProductDao {
     EntityManager entityManager = factory.createEntityManager();
 
     public Product saveOrYUpdate(Product product) {
-        if (entityManager.contains(product)) {
+        if (product.getId() != null) {
+            entityManager.getTransaction().begin();
             entityManager.merge(product);
+            entityManager.getTransaction().commit();
         } else {
+            entityManager.getTransaction().begin();
             entityManager.persist(product);
+            entityManager.getTransaction().commit();
         }
         return product;
     }
 
-    public Product findById(int id) {
+    public Product findById(Long id) {
         Product product = entityManager.createNamedQuery("Product.findById", Product.class).getSingleResult();
         return product;
     }
@@ -32,7 +36,9 @@ public class ProductDao {
         return products;
     }
 
-    public void deleteById(int id) {
-        entityManager.remove(findById(id));
+    public void deleteById(Long id) {
+        entityManager.getTransaction().begin();
+        entityManager.remove(entityManager.find(Product.class, id));
+        entityManager.getTransaction().commit();
     }
 }
