@@ -1,25 +1,38 @@
-package com.springboot.springbootstart.components;
+package com.springboot.springbootstart.model;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "`products`")
+@NamedQueries({
+        @NamedQuery(name = "Product.findAll", query = "SELECT product FROM Product product"),
+        @NamedQuery(name = "Product.findById", query = "SELECT product FROM Product product WHERE product.id = :id")
+})
 @Component
 @Scope("prototype")
 public class Product {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "cost")
     private double cost;
 
     public Product() {
     }
 
-    public Product(int id, String title, double cost) {
+    public Product(Long id, String title, double cost) {
         this.id = id;
         this.title = title;
         this.cost = cost;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -31,7 +44,7 @@ public class Product {
         this.cost = cost;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

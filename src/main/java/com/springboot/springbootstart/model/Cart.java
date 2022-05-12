@@ -1,5 +1,6 @@
-package com.springboot.springbootstart.components;
+package com.springboot.springbootstart.model;
 
+import com.springboot.springbootstart.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -9,17 +10,17 @@ import java.util.Map;
 @Component
 @Scope("prototype")
 public class Cart {
-    private final Map<Integer, Product> productCart = new HashMap<>();
+    private final Map<Long, Product> productCart = new HashMap<>();
 
     @Autowired
     private ProductRepository productRepository;
 
-    public Map<Integer, Product> getProductCart() {
+    public Map<Long, Product> getProductCart() {
         return productCart;
     }
 
     public void printCart() {
-        for (Map.Entry<Integer, Product> entry: productCart.entrySet()) {
+        for (Map.Entry<Long, Product> entry: productCart.entrySet()) {
             Product p = entry.getValue();
             System.out.println(p.getTitle() + ": " + p.getCost());
         }
