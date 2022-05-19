@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS products CASCADE;
+
+CREATE TABLE products (id bigserial, title varchar(255), cost double precision, PRIMARY KEY (id));
