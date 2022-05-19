@@ -1,9 +1,7 @@
-package com.springboot.springbootstart.model;
-
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+package com.springboot.springbootstart.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "`products`")
@@ -11,11 +9,9 @@ import javax.persistence.*;
         @NamedQuery(name = "Product.findAll", query = "SELECT product FROM Product product"),
         @NamedQuery(name = "Product.findById", query = "SELECT product FROM Product product WHERE product.id = :id")
 })
-@Component
-@Scope("prototype")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "title")
@@ -23,14 +19,13 @@ public class Product {
     @Column(name = "cost")
     private double cost;
 
-    public Product() {
-    }
-
-    public Product(Long id, String title, double cost) {
-        this.id = id;
-        this.title = title;
-        this.cost = cost;
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "products_customers",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "customer_id")
+    )
+    private List<Customer> customers;
 
     public void setId(Long id) {
         this.id = id;
@@ -54,5 +49,9 @@ public class Product {
 
     public double getCost() {
         return cost;
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
     }
 }

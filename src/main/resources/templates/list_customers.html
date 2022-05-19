@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Тег TH</title>
+  <style type="text/css">
+    table {
+     border-collapse: collapse; /* Отображать двойные линии как одинарные */
+    }
+    th {
+     background: #ccc; /* Цвет фона */
+     text-align: left; /* Выравнивание по левому краю */
+    }
+    td, th {
+     border: 1px solid #800; /* Параметры границы */
+     padding: 4px; /* Поля в ячейках */
+    }
+  </style>
+</head>
+<body>
+    <table width="100%" cellspacing="0" border="1">
+        <tr>
+            <form th:action="@{'/list_customers'}" th:object="${customer}" method="post">
+                <th><button type="submit">Add</button></th>
+                <th>ID: </th>
+                <th>Name: <input type="text" th:field="*{name}"/></th>
+            </form>
+        </tr>
+        <tr th:each="view: ${view}">
+            <th><a th:href="@{/list_customers/delete(id=${view.id})}">Delete</a></th>
+            <th><p th:text="${view.id}"/></th>
+            <th><p th:text="${view.name}"/></th>
+        </tr>
+    </table>
+</body>
+</html>

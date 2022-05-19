@@ -1,7 +1,7 @@
 package com.springboot.springbootstart.controllers;
 
-import com.springboot.springbootstart.entity.Product;
-import com.springboot.springbootstart.dao.ProductDao;
+import com.springboot.springbootstart.dao.CustomerDao;
+import com.springboot.springbootstart.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,33 +13,33 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
-public class ListProductController {
+public class ListCustomerController {
     @Autowired
-    private ProductDao productDao;
+    private CustomerDao customerDao;
 
-    @GetMapping("/list_products")
+    @GetMapping("/list_customers")
     public String getForm(Model model) {
-        Product product = new Product();
-        model.addAttribute("product", product);
+        Customer customer = new Customer();
+        model.addAttribute("customer", customer);
         setModelAttribute(model);
-        return "list_products";
+        return "list_customers";
     }
 
-    @PostMapping("/list_products")
-    public String create (Product product, Model model) {
-        productDao.saveOrUpdate(product);
+    @PostMapping("/list_customers")
+    public String create (Customer customer, Model model) {
+        customerDao.saveOrUpdate(customer);
         setModelAttribute(model);
-        return "list_products";
+        return "list_customers";
     }
 
-    @GetMapping("/list_products/delete")
+    @GetMapping("/list_customers/delete")
     public String delete (@RequestParam Long id, HttpServletResponse response) {
-        productDao.deleteById(id);
-        return "redirect:/list_products";
+        customerDao.deleteById(id);
+        return "redirect:/list_customers";
     }
 
     private void setModelAttribute (Model model) {
-        List<Product> view = productDao.findAll();
+        List<Customer> view = customerDao.findAll();
         model.addAttribute("view", view);
     }
 }

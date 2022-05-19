@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Тег TH</title>
+  <style type="text/css">
+    table {
+     border-collapse: collapse; /* Отображать двойные линии как одинарные */
+    }
+    th {
+     background: #ccc; /* Цвет фона */
+     text-align: left; /* Выравнивание по левому краю */
+    }
+    td, th {
+     border: 1px solid #800; /* Параметры границы */
+     padding: 4px; /* Поля в ячейках */
+    }
+  </style>
+</head>
+<body>
+    <table width="100%" cellspacing="0" border="1">
+        <tr>
+            <form th:action="@{'/get_products'}" th:object="${customer}" method="post">
+                <th><button type="submit">Search</button></th>
+                <th>Customer ID: <input type="text" th:field="*{id}"/></th>
+                <th>Title: </th>
+                <th>Cost: </th>
+            </form>
+        </tr>
+        <tr th:each="list: ${list}">
+            <th></th>
+            <th></th>
+            <th><p th:text="${list.title}"/></th>
+            <th><p th:text="${list.cost}"/></th>
+        </tr>
+    </table>
+</body>
+</html>

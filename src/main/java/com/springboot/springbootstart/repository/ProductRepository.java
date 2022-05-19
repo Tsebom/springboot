@@ -1,6 +1,6 @@
 package com.springboot.springbootstart.repository;
 
-import com.springboot.springbootstart.model.Product;
+import com.springboot.springbootstart.entity.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -8,9 +8,6 @@ import java.util.List;
 @Component
 public class ProductRepository {
     private final List<Product> productList = new ArrayList<>();
-
-    public ProductRepository() {
-    }
 
     public void addProduct(Product product) {
         productList.add(product);

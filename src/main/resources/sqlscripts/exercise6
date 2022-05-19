@@ -1,0 +1,58 @@
+DROP TABLE IF EXISTS customers CASCADE;
+DROP TABLE IF EXISTS products CASCADE;
+DROP TABLE IF EXISTS products_customers CASCADE;
+
+CREATE TABLE customers (id bigserial, name varchar(255), PRIMARY KEY (id));
+CREATE TABLE products (id bigserial, title varchar(255), cost double precision, PRIMARY KEY (id));
+CREATE TABLE products_customers (product_id bigserial REFERENCES products (id),
+customer_id bigserial REFERENCES customers (id), cost_buy double precision);
+
+INSERT INTO products (title, cost) VALUES ('Nokia', 200);
+INSERT INTO products (title, cost) VALUES ('Samsung', 210);
+INSERT INTO products (title, cost) VALUES ('LG', 190);
+INSERT INTO products (title, cost) VALUES ('Canon', 2000);
+INSERT INTO products (title, cost) VALUES ('Nikon', 250);
+INSERT INTO products (title, cost) VALUES ('Philips', 20);
+INSERT INTO products (title, cost) VALUES ('Чайка', 0);
+
+INSERT INTO customers (name) VALUES ('Tom');
+INSERT INTO customers (name) VALUES ('Jerry');
+INSERT INTO customers (name) VALUES ('Miki');
+INSERT INTO customers (name) VALUES ('Mini');
+INSERT INTO customers (name) VALUES ('Goofy');
+INSERT INTO customers (name) VALUES ('Neo');
+INSERT INTO customers (name) VALUES ('Trinity');
+
+INSERT INTO products_customers (product_id, customer_id, cost_buy) VALUES (1, 1,
+    (SELECT cost FROM products WHERE id = 1));
+INSERT INTO products_customers (product_id, customer_id, cost_buy) VALUES (5, 1,
+    (SELECT cost FROM products WHERE id = 5));
+
+INSERT INTO products_customers (product_id, customer_id, cost_buy) VALUES (3, 2,
+    (SELECT cost FROM products WHERE id = 3));
+INSERT INTO products_customers (product_id, customer_id, cost_buy) VALUES (7, 2,
+    (SELECT cost FROM products WHERE id = 7));
+INSERT INTO products_customers (product_id, customer_id, cost_buy) VALUES (6, 2,
+    (SELECT cost FROM products WHERE id = 6));
+
+INSERT INTO products_customers (product_id, customer_id, cost_buy) VALUES (4, 3,
+    (SELECT cost FROM products WHERE id = 4));
+
+INSERT INTO products_customers (product_id, customer_id, cost_buy) VALUES (7, 4,
+    (SELECT cost FROM products WHERE id = 7));
+INSERT INTO products_customers (product_id, customer_id, cost_buy) VALUES (6, 4,
+    (SELECT cost FROM products WHERE id = 6));
+INSERT INTO products_customers (product_id, customer_id, cost_buy) VALUES (5, 4,
+    (SELECT cost FROM products WHERE id = 5));
+INSERT INTO products_customers (product_id, customer_id, cost_buy) VALUES (4, 4,
+    (SELECT cost FROM products WHERE id = 4));
+
+INSERT INTO products_customers (product_id, customer_id, cost_buy) VALUES (7, 5,
+    (SELECT cost FROM products WHERE id = 7));
+
+INSERT INTO products_customers (product_id, customer_id, cost_buy) VALUES (2, 6,
+    (SELECT cost FROM products WHERE id = 2));
+INSERT INTO products_customers (product_id, customer_id, cost_buy) VALUES (6, 6,
+    (SELECT cost FROM products WHERE id = 6));
+INSERT INTO products_customers (product_id, customer_id, cost_buy) VALUES (4, 6,
+    (SELECT cost FROM products WHERE id = 4));
