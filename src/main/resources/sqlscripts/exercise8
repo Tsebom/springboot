@@ -1,0 +1,26 @@
+DROP TABLE IF EXISTS customers CASCADE;
+DROP TABLE IF EXISTS products CASCADE;
+DROP TABLE IF EXISTS products_customers CASCADE;
+
+CREATE TABLE products (id bigserial, title varchar(255), cost double precision, PRIMARY KEY (id));
+
+INSERT INTO products (title, cost) VALUES ('Nokia', 200);
+INSERT INTO products (title, cost) VALUES ('Samsung', 210);
+INSERT INTO products (title, cost) VALUES ('LG', 190);
+INSERT INTO products (title, cost) VALUES ('Canon', 2000);
+INSERT INTO products (title, cost) VALUES ('Nikon', 250);
+INSERT INTO products (title, cost) VALUES ('Philips', 20);
+INSERT INTO products (title, cost) VALUES ('Чайка', 0);
+INSERT INTO products (title, cost) VALUES ('Sony', 350);
+INSERT INTO products (title, cost) VALUES ('Toshiba', 30);
+INSERT INTO products (title, cost) VALUES ('Google', 10000);
+INSERT INTO products (title, cost) VALUES ('Apple', 99999);
+INSERT INTO products (title, cost) VALUES ('Adidas', 400);
+INSERT INTO products (title, cost) VALUES ('Puma', 800);
+INSERT INTO products (title, cost) VALUES ('Nike', 450);
+INSERT INTO products (title, cost) VALUES ('Leica', 3000);
+INSERT INTO products (title, cost) VALUES ('TSMS', 10000);
+INSERT INTO products (title, cost) VALUES ('ASML', 10000);
+INSERT INTO products (title, cost) VALUES ('Volvo', 4000);
+INSERT INTO products (title, cost) VALUES ('Horse', 20000);
+INSERT INTO products (title, cost) VALUES ('BMW', 6500);

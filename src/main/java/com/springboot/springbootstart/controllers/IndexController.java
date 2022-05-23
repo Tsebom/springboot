@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("list", "products");
+        model.addAttribute("rest_products", "Rest manager of products");
         return "index";
     }
 }
